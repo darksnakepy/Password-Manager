@@ -1,5 +1,8 @@
 #include <wx/wx.h>
 #include "App.h"
+#include "MainFrame.h"
+#include <curl/curl.h>
+#include <json/json.h>
 
 /*class mainWindow : public wxApp {
 public:
@@ -25,22 +28,32 @@ public:
 };
 */
 
+bool requestHttp() {
+	Json::Value data;
+
+	CURL* curl = curl_easy_init();;
+	CURLcode statusCode;
+
+	data["username"] = "";
+	data["password"] = "";
+
+	if (curl) {
+		curl_easy_setopt(curl, CURLOPT_URL, "login.php");
+		statusCode = curl_easy_perform(curl);
+		if (statusCode != CURLE_OK) {
+			return false;
+		}
+		curl_easy_cleanup(curl);
+		return true;
+	}
+}
+
 
 bool MyApp::OnInit()
 {	
-	//mainFrame* mainFrame = new mainFrame("pswManager", wxPoint(800, 600), wxSize(wxDefaultSize));
-	wxFrame* mainFrame = new wxFrame(NULL, wxID_ANY, "Password Manager", wxDefaultPosition, wxSize(800, 600));
-	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
-	wxPanel* panel = new wxPanel(mainFrame, wxID_ANY, wxDefaultPosition, wxSize(800, 600));
-
-	//wxStaticText* passwordLabel = new wxStaticText(panel, wxID_ANY, "PASSWORD", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER_HORIZONTAL);
-	wxCheckBox* checkbox1 = new wxCheckBox(panel, wxID_ANY, "", wxPoint(500, 500), wxSize(50,50));
-	wxStaticBox* groupboxPass = new wxStaticBox(panel, wxID_ANY, "StaticBox", wxPoint(400, 300), wxDefaultSize);
-	
-	panel->SetBackgroundColour(wxColour(*wxWHITE));
-	//passwordLabel->SetFont(wxFont(12, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
+	MainFrame* mainFrame = new MainFrame("Login");
 	mainFrame->Show();
-	sizer->Add(groupboxPass, 50);
+	mainFrame->SetClientSize(420, 585);
 	return true;
 }
 
