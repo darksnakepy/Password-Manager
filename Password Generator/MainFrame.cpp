@@ -1,6 +1,7 @@
 #include "MainFrame.h"
 #include <wx/wx.h>
-
+#include "app.h"
+#include "requestHandle.h"	
 enum IDs {
 
 };
@@ -14,5 +15,6 @@ MainFrame::MainFrame(const wxString& title) :wxFrame(nullptr, wxID_ANY, title) {
 	wxTextCtrl* inputPass = new wxTextCtrl(panel, wxID_ANY, wxEmptyString, wxPoint(48, 210), wxSize(321, 41));
 	//wxStaticText* userText = new wxStaticText(panel, wxID_ANY, wxPoint(48, 100), wxDefaultSize, );
 	//wxStaticText* passText = new wxStaticText(panel, wxID_ANY, wxPoint(48, 100), wxDefaultSize, );
-
+	loginButton->Bind(wxEVT_BUTTON, &Requests::requestHttp(), this);
+	
 }
