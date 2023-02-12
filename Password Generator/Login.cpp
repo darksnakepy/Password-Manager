@@ -10,7 +10,7 @@ bool MyApp::OnInit()
 {	
 	MainFrame* mainFrame = new MainFrame("Login"); 
 	mainFrame->Show();
-	mainFrame->SetClientSize(420, 585);
+	mainFrame->SetClientSize(420, 485);
 	return true;
 }
 

@@ -3,13 +3,9 @@
 #include "MainFrame.h"
 #include <string>
 
-class Requests{
+/*class Requests {
     public:
         void requestHttp() {
-            MainFrame* mainframe;
-            wxString inputUsername = mainframe.inputUser->GetValue();
-            wxString inputPassword = mainframe.inputPass->GetValue();
-
             CURL* curl = curl_easy_init();
             CURLcode statusCode; 
             Json::Value data;
@@ -33,3 +29,4 @@ class Requests{
             }
         }
 }
+*/
